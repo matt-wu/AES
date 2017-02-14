@@ -1,0 +1,895 @@
+AES - Rijndael Step by Step ...
+      Version 1.0
+
+      Matt Wu <blog.dynox.cn>
+
+
+AES_CYPHER_128 encrypt test case:
+Input:
+    data:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rot: 0d0e0f0c sub: d7ab76fe rcon: 01000000 xor: fe76abd6 rs: d6aa74fd
+    05:  equ: d6aa74fd rs: d2af72fa
+    06:  equ: d2af72fa rs: daa678f1
+    07:  equ: daa678f1 rs: d6ab76fe
+    08:  rot: ab76fed6 sub: 6238bbf6 rcon: 02000000 xor: f6bb3860 rs: b692cf0b
+    09:  equ: b692cf0b rs: 643dbdf1
+    10:  equ: 643dbdf1 rs: be9bc500
+    11:  equ: be9bc500 rs: 6830b3fe
+    12:  rot: 30b3fe68 sub: 046dbb45 rcon: 04000000 xor: 45bb6d00 rs: b6ff744e
+    13:  equ: b6ff744e rs: d2c2c9bf
+    14:  equ: d2c2c9bf rs: 6c590cbf
+    15:  equ: 6c590cbf rs: 0469bf41
+    16:  rot: 69bf4104 sub: f90883f2 rcon: 08000000 xor: f28308f1 rs: 47f7f7bc
+    17:  equ: 47f7f7bc rs: 95353e03
+    18:  equ: 95353e03 rs: f96c32bc
+    19:  equ: f96c32bc rs: fd058dfd
+    20:  rot: 058dfdfd sub: 6b5d5454 rcon: 10000000 xor: 54545d7b rs: 3caaa3e8
+    21:  equ: 3caaa3e8 rs: a99f9deb
+    22:  equ: a99f9deb rs: 50f3af57
+    23:  equ: 50f3af57 rs: adf622aa
+    24:  rot: f622aaad sub: 4293ac95 rcon: 20000000 xor: 95ac9362 rs: 5e390f7d
+    25:  equ: 5e390f7d rs: f7a69296
+    26:  equ: f7a69296 rs: a7553dc1
+    27:  equ: a7553dc1 rs: 0aa31f6b
+    28:  rot: a31f6b0a sub: 0ac07f67 rcon: 40000000 xor: 677fc04a rs: 14f9701a
+    29:  equ: 14f9701a rs: e35fe28c
+    30:  equ: e35fe28c rs: 440adf4d
+    31:  equ: 440adf4d rs: 4ea9c026
+    32:  rot: a9c0264e sub: d3baf72f rcon: 80000000 xor: 2ff7ba53 rs: 47438735
+    33:  equ: 47438735 rs: a41c65b9
+    34:  equ: a41c65b9 rs: e016baf4
+    35:  equ: e016baf4 rs: aebf7ad2
+    36:  rot: bf7ad2ae sub: 08dab5e4 rcon: 1b000000 xor: e4b5da13 rs: 549932d1
+    37:  equ: 549932d1 rs: f0855768
+    38:  equ: f0855768 rs: 1093ed9c
+    39:  equ: 1093ed9c rs: be2c974e
+    40:  rot: 2c974ebe sub: 71882fae rcon: 36000000 xor: ae2f8847 rs: 13111d7f
+    41:  equ: 13111d7f rs: e3944a17
+    42:  equ: e3944a17 rs: f307a78b
+    43:  equ: f307a78b rs: 4d2b30c5
+Encrypting block at 0 ...
+ Round 0:
+   input:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 1:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   round:  d6 aa 74 fd d2 af 72 fa da a6 78 f1 d6 ab 76 fe
+   state:  89 d8 10 e8 85 5a ce 68 2d 18 43 d8 cb 12 8f e4
+ Round 2:
+   input:  89 d8 10 e8 85 5a ce 68 2d 18 43 d8 cb 12 8f e4
+     sub:  a7 61 ca 9b 97 be 8b 45 d8 ad 1a 61 1f c9 73 69
+   shift:  a7 be 1a 69 97 ad 73 9b d8 c9 ca 45 1f 61 8b 61
+     mix:  ff 87 96 84 31 d8 6a 51 64 51 51 fa 77 3a d0 09
+   round:  b6 92 cf 0b 64 3d bd f1 be 9b c5 00 68 30 b3 fe
+   state:  49 15 59 8f 55 e5 d7 a0 da ca 94 fa 1f 0a 63 f7
+ Round 3:
+   input:  49 15 59 8f 55 e5 d7 a0 da ca 94 fa 1f 0a 63 f7
+     sub:  3b 59 cb 73 fc d9 0e e0 57 74 22 2d c0 67 fb 68
+   shift:  3b d9 22 68 fc 74 fb 73 57 67 cb e0 c0 59 0e 2d
+     mix:  4c 9c 1e 66 f7 71 f0 76 2c 3f 86 8e 53 4d f2 56
+   round:  b6 ff 74 4e d2 c2 c9 bf 6c 59 0c bf 04 69 bf 41
+   state:  fa 63 6a 28 25 b3 39 c9 40 66 8a 31 57 24 4d 17
+ Round 4:
+   input:  fa 63 6a 28 25 b3 39 c9 40 66 8a 31 57 24 4d 17
+     sub:  2d fb 02 34 3f 6d 12 dd 09 33 7e c7 5b 36 e3 f0
+   shift:  2d 6d 7e f0 3f 33 e3 34 09 36 02 dd 5b fb 12 c7
+     mix:  63 85 b7 9f fc 53 8d f9 97 be 47 8e 75 47 d6 91
+   round:  47 f7 f7 bc 95 35 3e 03 f9 6c 32 bc fd 05 8d fd
+   state:  24 72 40 23 69 66 b3 fa 6e d2 75 32 88 42 5b 6c
+ Round 5:
+   input:  24 72 40 23 69 66 b3 fa 6e d2 75 32 88 42 5b 6c
+     sub:  36 40 09 26 f9 33 6d 2d 9f b5 9d 23 c4 2c 39 50
+   shift:  36 33 9d 50 f9 b5 39 26 9f 2c 09 2d c4 40 6d 23
+     mix:  f4 bc d4 54 32 e5 54 d0 75 f1 d6 c5 1d d0 3b 3c
+   round:  3c aa a3 e8 a9 9f 9d eb 50 f3 af 57 ad f6 22 aa
+   state:  c8 16 77 bc 9b 7a c9 3b 25 02 79 92 b0 26 19 96
+ Round 6:
+   input:  c8 16 77 bc 9b 7a c9 3b 25 02 79 92 b0 26 19 96
+     sub:  e8 47 f5 65 14 da dd e2 3f 77 b6 4f e7 f7 d4 90
+   shift:  e8 da b6 90 14 77 d4 65 3f f7 f5 e2 e7 47 dd 4f
+     mix:  98 16 ee 74 00 f8 7f 55 6b 2c 04 9c 8e 5a d0 36
+   round:  5e 39 0f 7d f7 a6 92 96 a7 55 3d c1 0a a3 1f 6b
+   state:  c6 2f e1 09 f7 5e ed c3 cc 79 39 5d 84 f9 cf 5d
+ Round 7:
+   input:  c6 2f e1 09 f7 5e ed c3 cc 79 39 5d 84 f9 cf 5d
+     sub:  b4 15 f8 01 68 58 55 2e 4b b6 12 4c 5f 99 8a 4c
+   shift:  b4 58 12 4c 68 b6 8a 01 4b 99 f8 2e 5f 15 55 4c
+     mix:  c5 7e 1c 15 9a 9b d2 86 f0 5f 4b e0 98 c6 34 39
+   round:  14 f9 70 1a e3 5f e2 8c 44 0a df 4d 4e a9 c0 26
+   state:  d1 87 6c 0f 79 c4 30 0a b4 55 94 ad d6 6f f4 1f
+ Round 8:
+   input:  d1 87 6c 0f 79 c4 30 0a b4 55 94 ad d6 6f f4 1f
+     sub:  3e 17 50 76 b6 1c 04 67 8d fc 22 95 f6 a8 bf c0
+   shift:  3e 1c 22 c0 b6 fc bf 76 8d a8 50 67 f6 17 04 95
+     mix:  ba a0 3d e7 a1 f9 b5 6e d5 51 2c ba 5f 41 4d 23
+   round:  47 43 87 35 a4 1c 65 b9 e0 16 ba f4 ae bf 7a d2
+   state:  fd e3 ba d2 05 e5 d0 d7 35 47 96 4e f1 fe 37 f1
+ Round 9:
+   input:  fd e3 ba d2 05 e5 d0 d7 35 47 96 4e f1 fe 37 f1
+     sub:  54 11 f4 b5 6b d9 70 0e 96 a0 90 2f a1 bb 9a a1
+   shift:  54 d9 90 a1 6b a0 9a b5 96 bb f4 0e a1 11 70 2f
+     mix:  e9 f7 4e ec 02 30 20 f6 1b f2 cc f2 35 3c 21 c7
+   round:  54 99 32 d1 f0 85 57 68 10 93 ed 9c be 2c 97 4e
+   state:  bd 6e 7c 3d f2 b5 77 9e 0b 61 21 6e 8b 10 b6 89
+ Round 10:
+   input:  bd 6e 7c 3d f2 b5 77 9e 0b 61 21 6e 8b 10 b6 89
+     sub:  7a 9f 10 27 89 d5 f5 0b 2b ef fd 9f 3d ca 4e a7
+   shift:  7a d5 fd a7 89 ef 4e 27 2b ca 10 0b 3d 9f f5 9f
+   round:  13 11 1d 7f e3 94 4a 17 f3 07 a7 8b 4d 2b 30 c5
+   state:  69 c4 e0 d8 6a 7b 04 30 d8 cd b7 80 70 b4 c5 5a
+Output:
+  cypher:  69 c4 e0 d8 6a 7b 04 30 d8 cd b7 80 70 b4 c5 5a
+
+AES_CYPHER_128 decrypt test case:
+Input:
+    data:  69 c4 e0 d8 6a 7b 04 30 d8 cd b7 80 70 b4 c5 5a
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rot: 0d0e0f0c sub: d7ab76fe rcon: 01000000 xor: fe76abd6 rs: d6aa74fd
+    05:  equ: d6aa74fd rs: d2af72fa
+    06:  equ: d2af72fa rs: daa678f1
+    07:  equ: daa678f1 rs: d6ab76fe
+    08:  rot: ab76fed6 sub: 6238bbf6 rcon: 02000000 xor: f6bb3860 rs: b692cf0b
+    09:  equ: b692cf0b rs: 643dbdf1
+    10:  equ: 643dbdf1 rs: be9bc500
+    11:  equ: be9bc500 rs: 6830b3fe
+    12:  rot: 30b3fe68 sub: 046dbb45 rcon: 04000000 xor: 45bb6d00 rs: b6ff744e
+    13:  equ: b6ff744e rs: d2c2c9bf
+    14:  equ: d2c2c9bf rs: 6c590cbf
+    15:  equ: 6c590cbf rs: 0469bf41
+    16:  rot: 69bf4104 sub: f90883f2 rcon: 08000000 xor: f28308f1 rs: 47f7f7bc
+    17:  equ: 47f7f7bc rs: 95353e03
+    18:  equ: 95353e03 rs: f96c32bc
+    19:  equ: f96c32bc rs: fd058dfd
+    20:  rot: 058dfdfd sub: 6b5d5454 rcon: 10000000 xor: 54545d7b rs: 3caaa3e8
+    21:  equ: 3caaa3e8 rs: a99f9deb
+    22:  equ: a99f9deb rs: 50f3af57
+    23:  equ: 50f3af57 rs: adf622aa
+    24:  rot: f622aaad sub: 4293ac95 rcon: 20000000 xor: 95ac9362 rs: 5e390f7d
+    25:  equ: 5e390f7d rs: f7a69296
+    26:  equ: f7a69296 rs: a7553dc1
+    27:  equ: a7553dc1 rs: 0aa31f6b
+    28:  rot: a31f6b0a sub: 0ac07f67 rcon: 40000000 xor: 677fc04a rs: 14f9701a
+    29:  equ: 14f9701a rs: e35fe28c
+    30:  equ: e35fe28c rs: 440adf4d
+    31:  equ: 440adf4d rs: 4ea9c026
+    32:  rot: a9c0264e sub: d3baf72f rcon: 80000000 xor: 2ff7ba53 rs: 47438735
+    33:  equ: 47438735 rs: a41c65b9
+    34:  equ: a41c65b9 rs: e016baf4
+    35:  equ: e016baf4 rs: aebf7ad2
+    36:  rot: bf7ad2ae sub: 08dab5e4 rcon: 1b000000 xor: e4b5da13 rs: 549932d1
+    37:  equ: 549932d1 rs: f0855768
+    38:  equ: f0855768 rs: 1093ed9c
+    39:  equ: 1093ed9c rs: be2c974e
+    40:  rot: 2c974ebe sub: 71882fae rcon: 36000000 xor: ae2f8847 rs: 13111d7f
+    41:  equ: 13111d7f rs: e3944a17
+    42:  equ: e3944a17 rs: f307a78b
+    43:  equ: f307a78b rs: 4d2b30c5
+Decrypting block at 0 ...
+ Round 10:
+   input:  69 c4 e0 d8 6a 7b 04 30 d8 cd b7 80 70 b4 c5 5a
+   round:  13 11 1d 7f e3 94 4a 17 f3 07 a7 8b 4d 2b 30 c5
+   shift:  7a d5 fd a7 89 ef 4e 27 2b ca 10 0b 3d 9f f5 9f
+     sub:  7a 9f 10 27 89 d5 f5 0b 2b ef fd 9f 3d ca 4e a7
+   state:  bd 6e 7c 3d f2 b5 77 9e 0b 61 21 6e 8b 10 b6 89
+ Round 9:
+   input:  bd 6e 7c 3d f2 b5 77 9e 0b 61 21 6e 8b 10 b6 89
+   round:  54 99 32 d1 f0 85 57 68 10 93 ed 9c be 2c 97 4e
+     mix:  e9 f7 4e ec 02 30 20 f6 1b f2 cc f2 35 3c 21 c7
+   shift:  54 d9 90 a1 6b a0 9a b5 96 bb f4 0e a1 11 70 2f
+     sub:  54 11 f4 b5 6b d9 70 0e 96 a0 90 2f a1 bb 9a a1
+   state:  fd e3 ba d2 05 e5 d0 d7 35 47 96 4e f1 fe 37 f1
+ Round 8:
+   input:  fd e3 ba d2 05 e5 d0 d7 35 47 96 4e f1 fe 37 f1
+   round:  47 43 87 35 a4 1c 65 b9 e0 16 ba f4 ae bf 7a d2
+     mix:  ba a0 3d e7 a1 f9 b5 6e d5 51 2c ba 5f 41 4d 23
+   shift:  3e 1c 22 c0 b6 fc bf 76 8d a8 50 67 f6 17 04 95
+     sub:  3e 17 50 76 b6 1c 04 67 8d fc 22 95 f6 a8 bf c0
+   state:  d1 87 6c 0f 79 c4 30 0a b4 55 94 ad d6 6f f4 1f
+ Round 7:
+   input:  d1 87 6c 0f 79 c4 30 0a b4 55 94 ad d6 6f f4 1f
+   round:  14 f9 70 1a e3 5f e2 8c 44 0a df 4d 4e a9 c0 26
+     mix:  c5 7e 1c 15 9a 9b d2 86 f0 5f 4b e0 98 c6 34 39
+   shift:  b4 58 12 4c 68 b6 8a 01 4b 99 f8 2e 5f 15 55 4c
+     sub:  b4 15 f8 01 68 58 55 2e 4b b6 12 4c 5f 99 8a 4c
+   state:  c6 2f e1 09 f7 5e ed c3 cc 79 39 5d 84 f9 cf 5d
+ Round 6:
+   input:  c6 2f e1 09 f7 5e ed c3 cc 79 39 5d 84 f9 cf 5d
+   round:  5e 39 0f 7d f7 a6 92 96 a7 55 3d c1 0a a3 1f 6b
+     mix:  98 16 ee 74 00 f8 7f 55 6b 2c 04 9c 8e 5a d0 36
+   shift:  e8 da b6 90 14 77 d4 65 3f f7 f5 e2 e7 47 dd 4f
+     sub:  e8 47 f5 65 14 da dd e2 3f 77 b6 4f e7 f7 d4 90
+   state:  c8 16 77 bc 9b 7a c9 3b 25 02 79 92 b0 26 19 96
+ Round 5:
+   input:  c8 16 77 bc 9b 7a c9 3b 25 02 79 92 b0 26 19 96
+   round:  3c aa a3 e8 a9 9f 9d eb 50 f3 af 57 ad f6 22 aa
+     mix:  f4 bc d4 54 32 e5 54 d0 75 f1 d6 c5 1d d0 3b 3c
+   shift:  36 33 9d 50 f9 b5 39 26 9f 2c 09 2d c4 40 6d 23
+     sub:  36 40 09 26 f9 33 6d 2d 9f b5 9d 23 c4 2c 39 50
+   state:  24 72 40 23 69 66 b3 fa 6e d2 75 32 88 42 5b 6c
+ Round 4:
+   input:  24 72 40 23 69 66 b3 fa 6e d2 75 32 88 42 5b 6c
+   round:  47 f7 f7 bc 95 35 3e 03 f9 6c 32 bc fd 05 8d fd
+     mix:  63 85 b7 9f fc 53 8d f9 97 be 47 8e 75 47 d6 91
+   shift:  2d 6d 7e f0 3f 33 e3 34 09 36 02 dd 5b fb 12 c7
+     sub:  2d fb 02 34 3f 6d 12 dd 09 33 7e c7 5b 36 e3 f0
+   state:  fa 63 6a 28 25 b3 39 c9 40 66 8a 31 57 24 4d 17
+ Round 3:
+   input:  fa 63 6a 28 25 b3 39 c9 40 66 8a 31 57 24 4d 17
+   round:  b6 ff 74 4e d2 c2 c9 bf 6c 59 0c bf 04 69 bf 41
+     mix:  4c 9c 1e 66 f7 71 f0 76 2c 3f 86 8e 53 4d f2 56
+   shift:  3b d9 22 68 fc 74 fb 73 57 67 cb e0 c0 59 0e 2d
+     sub:  3b 59 cb 73 fc d9 0e e0 57 74 22 2d c0 67 fb 68
+   state:  49 15 59 8f 55 e5 d7 a0 da ca 94 fa 1f 0a 63 f7
+ Round 2:
+   input:  49 15 59 8f 55 e5 d7 a0 da ca 94 fa 1f 0a 63 f7
+   round:  b6 92 cf 0b 64 3d bd f1 be 9b c5 00 68 30 b3 fe
+     mix:  ff 87 96 84 31 d8 6a 51 64 51 51 fa 77 3a d0 09
+   shift:  a7 be 1a 69 97 ad 73 9b d8 c9 ca 45 1f 61 8b 61
+     sub:  a7 61 ca 9b 97 be 8b 45 d8 ad 1a 61 1f c9 73 69
+   state:  89 d8 10 e8 85 5a ce 68 2d 18 43 d8 cb 12 8f e4
+ Round 1:
+   input:  89 d8 10 e8 85 5a ce 68 2d 18 43 d8 cb 12 8f e4
+   round:  d6 aa 74 fd d2 af 72 fa da a6 78 f1 d6 ab 76 fe
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 0:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+Output:
+   plain:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+
+AES_CYPHER_192 encrypt test case:
+Input:
+    data:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rs: 10111213
+    05:  rs: 14151617
+    06:  rot: 15161714 sub: 5947f0fa rcon: 01000000 xor: faf04758 rs: 5846f2f9
+    07:  equ: 5846f2f9 rs: 5c43f4fe
+    08:  equ: 5c43f4fe rs: 544afef5
+    09:  equ: 544afef5 rs: 5847f0fa
+    10:  equ: 5847f0fa rs: 4856e2e9
+    11:  equ: 4856e2e9 rs: 5c43f4fe
+    12:  rot: 43f4fe5c sub: 1abfbb4a rcon: 02000000 xor: 4abbbf18 rs: 40f949b3
+    13:  equ: 40f949b3 rs: 1cbabd4d
+    14:  equ: 1cbabd4d rs: 48f043b8
+    15:  equ: 48f043b8 rs: 10b7b342
+    16:  equ: 10b7b342 rs: 58e151ab
+    17:  equ: 58e151ab rs: 04a2a555
+    18:  rot: a2a55504 sub: 3a06fcf2 rcon: 04000000 xor: f2fc063e rs: 7effb541
+    19:  equ: 7effb541 rs: 6245080c
+    20:  equ: 6245080c rs: 2ab54bb4
+    21:  equ: 2ab54bb4 rs: 3a02f8f6
+    22:  equ: 3a02f8f6 rs: 62e3a95d
+    23:  equ: 62e3a95d rs: 66410c08
+    24:  rot: 410c0866 sub: 83fe3033 rcon: 08000000 xor: 3330fe8b rs: f5018572
+    25:  equ: f5018572 rs: 97448d7e
+    26:  equ: 97448d7e rs: bdf1c6ca
+    27:  equ: bdf1c6ca rs: 87f33e3c
+    28:  equ: 87f33e3c rs: e5109761
+    29:  equ: e5109761 rs: 83519b69
+    30:  rot: 519b6983 sub: d114f9ec rcon: 10000000 xor: ecf914c1 rs: 34157c9e
+    31:  equ: 34157c9e rs: a351f1e0
+    32:  equ: a351f1e0 rs: 1ea0372a
+    33:  equ: 1ea0372a rs: 99530916
+    34:  equ: 99530916 rs: 7c439e77
+    35:  equ: 7c439e77 rs: ff12051e
+    36:  rot: 12051eff sub: c96b7216 rcon: 20000000 xor: 16726be9 rs: dd7e0e88
+    37:  equ: dd7e0e88 rs: 7e2fff68
+    38:  equ: 7e2fff68 rs: 608fc842
+    39:  equ: 608fc842 rs: f9dcc154
+    40:  equ: f9dcc154 rs: 859f5f23
+    41:  equ: 859f5f23 rs: 7a8d5a3d
+    42:  rot: 8d5a3d7a sub: 5dbe27da rcon: 40000000 xor: da27be1d rs: c0c02952
+    43:  equ: c0c02952 rs: beefd63a
+    44:  equ: beefd63a rs: de601e78
+    45:  equ: de601e78 rs: 27bcdf2c
+    46:  equ: 27bcdf2c rs: a223800f
+    47:  equ: a223800f rs: d8aeda32
+    48:  rot: aeda32d8 sub: e4572361 rcon: 80000000 xor: 61235764 rs: a4970a33
+    49:  equ: a4970a33 rs: 1a78dc09
+    50:  equ: 1a78dc09 rs: c418c271
+    51:  equ: c418c271 rs: e3a41d5d
+Encrypting block at 0 ...
+ Round 0:
+   input:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 1:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   round:  10 11 12 13 14 15 16 17 58 46 f2 f9 5c 43 f4 fe
+   state:  4f 63 76 06 43 e0 aa 85 af f8 c9 d0 41 fa 0d e4
+ Round 2:
+   input:  4f 63 76 06 43 e0 aa 85 af f8 c9 d0 41 fa 0d e4
+     sub:  84 fb 38 6f 1a e1 ac 97 79 41 dd 70 83 2d d7 69
+   shift:  84 e1 dd 69 1a 41 d7 6f 79 2d 38 97 83 fb ac 70
+     mix:  9f 48 7f 79 4f 95 5f 66 2a fc 86 ab d7 f1 ab 29
+   round:  54 4a fe f5 58 47 f0 fa 48 56 e2 e9 5c 43 f4 fe
+   state:  cb 02 81 8c 17 d2 af 9c 62 aa 64 42 8b b2 5f d7
+ Round 3:
+   input:  cb 02 81 8c 17 d2 af 9c 62 aa 64 42 8b b2 5f d7
+     sub:  1f 77 0c 64 f0 b5 79 de aa ac 43 2c 3d 37 cf 0e
+   shift:  1f b5 43 0e f0 ac cf 64 aa 37 0c de 3d 77 79 2c
+     mix:  b7 a5 3e cb bf 9d 75 a0 c4 0e fc 79 b6 74 cc 11
+   round:  40 f9 49 b3 1c ba bd 4d 48 f0 43 b8 10 b7 b3 42
+   state:  f7 5c 77 78 a3 27 c8 ed 8c fe bf c1 a6 c3 7f 53
+ Round 4:
+   input:  f7 5c 77 78 a3 27 c8 ed 8c fe bf c1 a6 c3 7f 53
+     sub:  68 4a f5 bc 0a cc e8 55 64 bb 08 78 24 2e d2 ed
+   shift:  68 cc 08 ed 0a bb d2 bc 64 2e f5 55 24 4a e8 78
+     mix:  7a 1e 98 bd ac b6 d1 14 1a 69 44 dd 06 eb 2d 3e
+   round:  58 e1 51 ab 04 a2 a5 55 7e ff b5 41 62 45 08 0c
+   state:  22 ff c9 16 a8 14 74 41 64 96 f1 9c 64 ae 25 32
+ Round 5:
+   input:  22 ff c9 16 a8 14 74 41 64 96 f1 9c 64 ae 25 32
+     sub:  93 16 dd 47 c2 fa 92 83 43 90 a1 de 43 e4 3f 23
+   shift:  93 fa a1 23 c2 90 3f 47 43 e4 dd 83 43 16 92 de
+     mix:  aa a7 55 b3 4c ff e5 7c ef 6f 98 e1 f0 1c 13 e6
+   round:  2a b5 4b b4 3a 02 f8 f6 62 e3 a9 5d 66 41 0c 08
+   state:  80 12 1e 07 76 fd 1d 8a 8d 8c 31 bc 96 5d 1f ee
+ Round 6:
+   input:  80 12 1e 07 76 fd 1d 8a 8d 8c 31 bc 96 5d 1f ee
+     sub:  cd c9 72 c5 38 54 a4 7e 5d 64 c7 65 90 4c c0 28
+   shift:  cd 54 c7 28 38 64 c0 c5 5d 4c 72 7e 90 c9 a4 65
+     mix:  92 1f 74 8f d9 6e 93 7d 62 2d 77 25 ba 8b a5 0c
+   round:  f5 01 85 72 97 44 8d 7e bd f1 c6 ca 87 f3 3e 3c
+   state:  67 1e f1 fd 4e 2a 1e 03 df dc b1 ef 3d 78 9b 30
+ Round 7:
+   input:  67 1e f1 fd 4e 2a 1e 03 df dc b1 ef 3d 78 9b 30
+     sub:  85 72 a1 54 2f e5 72 7b 9e 86 c8 df 27 bc 14 04
+   shift:  85 e5 c8 04 2f 86 14 54 9e bc a1 7b 27 72 72 df
+     mix:  e9 13 e7 b1 8f 50 7d 4b 22 7e f6 52 75 8a cb cc
+   round:  e5 10 97 61 83 51 9b 69 34 15 7c 9e a3 51 f1 e0
+   state:  0c 03 70 d0 0c 01 e6 22 16 6b 8a cc d6 db 3a 2c
+ Round 8:
+   input:  0c 03 70 d0 0c 01 e6 22 16 6b 8a cc d6 db 3a 2c
+     sub:  fe 7b 51 70 fe 7c 8e 93 47 7f 7e 4b f6 b9 80 71
+   shift:  fe 7c 7e 71 fe 7f 80 70 47 b9 51 93 f6 7b 8e 4b
+     mix:  6c f5 ed f9 96 eb 0a 06 9c 4e f2 1c bf c2 57 62
+   round:  1e a0 37 2a 99 53 09 16 7c 43 9e 77 ff 12 05 1e
+   state:  72 55 da d3 0f b8 03 10 e0 0d 6c 6b 40 d0 52 7c
+ Round 9:
+   input:  72 55 da d3 0f b8 03 10 e0 0d 6c 6b 40 d0 52 7c
+     sub:  40 fc 57 66 76 6c 7b ca e1 d7 50 7f 09 70 00 10
+   shift:  40 6c 50 10 76 d7 00 66 e1 70 57 ca 09 fc 7b 7f
+     mix:  74 78 bc dc e8 a5 0b 81 d4 32 7a 90 09 18 82 62
+   round:  dd 7e 0e 88 7e 2f ff 68 60 8f c8 42 f9 dc c1 54
+   state:  a9 06 b2 54 96 8a f4 e9 b4 bd b2 d2 f0 c4 43 36
+ Round 10:
+   input:  a9 06 b2 54 96 8a f4 e9 b4 bd b2 d2 f0 c4 43 36
+     sub:  d3 6f 37 20 90 7e bf 1e 8d 7a 37 b5 8c 1c 1a 05
+   shift:  d3 7e 37 05 90 7a 1a 20 8d 1c 37 1e 8c 6f bf b5
+     mix:  0d 73 cc 2d 8f 6a be 8b 0c f2 dd 9b b8 3d 42 2e
+   round:  85 9f 5f 23 7a 8d 5a 3d c0 c0 29 52 be ef d6 3a
+   state:  88 ec 93 0e f5 e7 e4 b6 cc 32 f4 c9 06 d2 94 14
+ Round 11:
+   input:  88 ec 93 0e f5 e7 e4 b6 cc 32 f4 c9 06 d2 94 14
+     sub:  c4 ce dc ab e6 94 69 4e 4b 23 bf dd 6f b5 22 fa
+   shift:  c4 94 bf fa e6 23 22 ab 4b b5 dc 4e 6f ce 69 dd
+     mix:  71 d7 20 93 3b 6d 67 7d c0 0b 8f 28 23 8e 0f b7
+   round:  de 60 1e 78 27 bc df 2c a2 23 80 0f d8 ae da 32
+   state:  af b7 3e eb 1c d1 b8 51 62 28 0f 27 fb 20 d5 85
+ Round 12:
+   input:  af b7 3e eb 1c d1 b8 51 62 28 0f 27 fb 20 d5 85
+     sub:  79 a9 b2 e9 9c 3e 6c d1 aa 34 76 cc 0f b7 03 97
+   shift:  79 3e 76 97 9c 34 03 e9 aa b7 b2 d1 0f a9 6c cc
+   round:  a4 97 0a 33 1a 78 dc 09 c4 18 c2 71 e3 a4 1d 5d
+   state:  dd a9 7c a4 86 4c df e0 6e af 70 a0 ec 0d 71 91
+Output:
+  cypher:  dd a9 7c a4 86 4c df e0 6e af 70 a0 ec 0d 71 91
+
+AES_CYPHER_192 decrypt test case:
+Input:
+    data:  dd a9 7c a4 86 4c df e0 6e af 70 a0 ec 0d 71 91
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rs: 10111213
+    05:  rs: 14151617
+    06:  rot: 15161714 sub: 5947f0fa rcon: 01000000 xor: faf04758 rs: 5846f2f9
+    07:  equ: 5846f2f9 rs: 5c43f4fe
+    08:  equ: 5c43f4fe rs: 544afef5
+    09:  equ: 544afef5 rs: 5847f0fa
+    10:  equ: 5847f0fa rs: 4856e2e9
+    11:  equ: 4856e2e9 rs: 5c43f4fe
+    12:  rot: 43f4fe5c sub: 1abfbb4a rcon: 02000000 xor: 4abbbf18 rs: 40f949b3
+    13:  equ: 40f949b3 rs: 1cbabd4d
+    14:  equ: 1cbabd4d rs: 48f043b8
+    15:  equ: 48f043b8 rs: 10b7b342
+    16:  equ: 10b7b342 rs: 58e151ab
+    17:  equ: 58e151ab rs: 04a2a555
+    18:  rot: a2a55504 sub: 3a06fcf2 rcon: 04000000 xor: f2fc063e rs: 7effb541
+    19:  equ: 7effb541 rs: 6245080c
+    20:  equ: 6245080c rs: 2ab54bb4
+    21:  equ: 2ab54bb4 rs: 3a02f8f6
+    22:  equ: 3a02f8f6 rs: 62e3a95d
+    23:  equ: 62e3a95d rs: 66410c08
+    24:  rot: 410c0866 sub: 83fe3033 rcon: 08000000 xor: 3330fe8b rs: f5018572
+    25:  equ: f5018572 rs: 97448d7e
+    26:  equ: 97448d7e rs: bdf1c6ca
+    27:  equ: bdf1c6ca rs: 87f33e3c
+    28:  equ: 87f33e3c rs: e5109761
+    29:  equ: e5109761 rs: 83519b69
+    30:  rot: 519b6983 sub: d114f9ec rcon: 10000000 xor: ecf914c1 rs: 34157c9e
+    31:  equ: 34157c9e rs: a351f1e0
+    32:  equ: a351f1e0 rs: 1ea0372a
+    33:  equ: 1ea0372a rs: 99530916
+    34:  equ: 99530916 rs: 7c439e77
+    35:  equ: 7c439e77 rs: ff12051e
+    36:  rot: 12051eff sub: c96b7216 rcon: 20000000 xor: 16726be9 rs: dd7e0e88
+    37:  equ: dd7e0e88 rs: 7e2fff68
+    38:  equ: 7e2fff68 rs: 608fc842
+    39:  equ: 608fc842 rs: f9dcc154
+    40:  equ: f9dcc154 rs: 859f5f23
+    41:  equ: 859f5f23 rs: 7a8d5a3d
+    42:  rot: 8d5a3d7a sub: 5dbe27da rcon: 40000000 xor: da27be1d rs: c0c02952
+    43:  equ: c0c02952 rs: beefd63a
+    44:  equ: beefd63a rs: de601e78
+    45:  equ: de601e78 rs: 27bcdf2c
+    46:  equ: 27bcdf2c rs: a223800f
+    47:  equ: a223800f rs: d8aeda32
+    48:  rot: aeda32d8 sub: e4572361 rcon: 80000000 xor: 61235764 rs: a4970a33
+    49:  equ: a4970a33 rs: 1a78dc09
+    50:  equ: 1a78dc09 rs: c418c271
+    51:  equ: c418c271 rs: e3a41d5d
+Decrypting block at 0 ...
+ Round 12:
+   input:  dd a9 7c a4 86 4c df e0 6e af 70 a0 ec 0d 71 91
+   round:  a4 97 0a 33 1a 78 dc 09 c4 18 c2 71 e3 a4 1d 5d
+   shift:  79 3e 76 97 9c 34 03 e9 aa b7 b2 d1 0f a9 6c cc
+     sub:  79 a9 b2 e9 9c 3e 6c d1 aa 34 76 cc 0f b7 03 97
+   state:  af b7 3e eb 1c d1 b8 51 62 28 0f 27 fb 20 d5 85
+ Round 11:
+   input:  af b7 3e eb 1c d1 b8 51 62 28 0f 27 fb 20 d5 85
+   round:  de 60 1e 78 27 bc df 2c a2 23 80 0f d8 ae da 32
+     mix:  71 d7 20 93 3b 6d 67 7d c0 0b 8f 28 23 8e 0f b7
+   shift:  c4 94 bf fa e6 23 22 ab 4b b5 dc 4e 6f ce 69 dd
+     sub:  c4 ce dc ab e6 94 69 4e 4b 23 bf dd 6f b5 22 fa
+   state:  88 ec 93 0e f5 e7 e4 b6 cc 32 f4 c9 06 d2 94 14
+ Round 10:
+   input:  88 ec 93 0e f5 e7 e4 b6 cc 32 f4 c9 06 d2 94 14
+   round:  85 9f 5f 23 7a 8d 5a 3d c0 c0 29 52 be ef d6 3a
+     mix:  0d 73 cc 2d 8f 6a be 8b 0c f2 dd 9b b8 3d 42 2e
+   shift:  d3 7e 37 05 90 7a 1a 20 8d 1c 37 1e 8c 6f bf b5
+     sub:  d3 6f 37 20 90 7e bf 1e 8d 7a 37 b5 8c 1c 1a 05
+   state:  a9 06 b2 54 96 8a f4 e9 b4 bd b2 d2 f0 c4 43 36
+ Round 9:
+   input:  a9 06 b2 54 96 8a f4 e9 b4 bd b2 d2 f0 c4 43 36
+   round:  dd 7e 0e 88 7e 2f ff 68 60 8f c8 42 f9 dc c1 54
+     mix:  74 78 bc dc e8 a5 0b 81 d4 32 7a 90 09 18 82 62
+   shift:  40 6c 50 10 76 d7 00 66 e1 70 57 ca 09 fc 7b 7f
+     sub:  40 fc 57 66 76 6c 7b ca e1 d7 50 7f 09 70 00 10
+   state:  72 55 da d3 0f b8 03 10 e0 0d 6c 6b 40 d0 52 7c
+ Round 8:
+   input:  72 55 da d3 0f b8 03 10 e0 0d 6c 6b 40 d0 52 7c
+   round:  1e a0 37 2a 99 53 09 16 7c 43 9e 77 ff 12 05 1e
+     mix:  6c f5 ed f9 96 eb 0a 06 9c 4e f2 1c bf c2 57 62
+   shift:  fe 7c 7e 71 fe 7f 80 70 47 b9 51 93 f6 7b 8e 4b
+     sub:  fe 7b 51 70 fe 7c 8e 93 47 7f 7e 4b f6 b9 80 71
+   state:  0c 03 70 d0 0c 01 e6 22 16 6b 8a cc d6 db 3a 2c
+ Round 7:
+   input:  0c 03 70 d0 0c 01 e6 22 16 6b 8a cc d6 db 3a 2c
+   round:  e5 10 97 61 83 51 9b 69 34 15 7c 9e a3 51 f1 e0
+     mix:  e9 13 e7 b1 8f 50 7d 4b 22 7e f6 52 75 8a cb cc
+   shift:  85 e5 c8 04 2f 86 14 54 9e bc a1 7b 27 72 72 df
+     sub:  85 72 a1 54 2f e5 72 7b 9e 86 c8 df 27 bc 14 04
+   state:  67 1e f1 fd 4e 2a 1e 03 df dc b1 ef 3d 78 9b 30
+ Round 6:
+   input:  67 1e f1 fd 4e 2a 1e 03 df dc b1 ef 3d 78 9b 30
+   round:  f5 01 85 72 97 44 8d 7e bd f1 c6 ca 87 f3 3e 3c
+     mix:  92 1f 74 8f d9 6e 93 7d 62 2d 77 25 ba 8b a5 0c
+   shift:  cd 54 c7 28 38 64 c0 c5 5d 4c 72 7e 90 c9 a4 65
+     sub:  cd c9 72 c5 38 54 a4 7e 5d 64 c7 65 90 4c c0 28
+   state:  80 12 1e 07 76 fd 1d 8a 8d 8c 31 bc 96 5d 1f ee
+ Round 5:
+   input:  80 12 1e 07 76 fd 1d 8a 8d 8c 31 bc 96 5d 1f ee
+   round:  2a b5 4b b4 3a 02 f8 f6 62 e3 a9 5d 66 41 0c 08
+     mix:  aa a7 55 b3 4c ff e5 7c ef 6f 98 e1 f0 1c 13 e6
+   shift:  93 fa a1 23 c2 90 3f 47 43 e4 dd 83 43 16 92 de
+     sub:  93 16 dd 47 c2 fa 92 83 43 90 a1 de 43 e4 3f 23
+   state:  22 ff c9 16 a8 14 74 41 64 96 f1 9c 64 ae 25 32
+ Round 4:
+   input:  22 ff c9 16 a8 14 74 41 64 96 f1 9c 64 ae 25 32
+   round:  58 e1 51 ab 04 a2 a5 55 7e ff b5 41 62 45 08 0c
+     mix:  7a 1e 98 bd ac b6 d1 14 1a 69 44 dd 06 eb 2d 3e
+   shift:  68 cc 08 ed 0a bb d2 bc 64 2e f5 55 24 4a e8 78
+     sub:  68 4a f5 bc 0a cc e8 55 64 bb 08 78 24 2e d2 ed
+   state:  f7 5c 77 78 a3 27 c8 ed 8c fe bf c1 a6 c3 7f 53
+ Round 3:
+   input:  f7 5c 77 78 a3 27 c8 ed 8c fe bf c1 a6 c3 7f 53
+   round:  40 f9 49 b3 1c ba bd 4d 48 f0 43 b8 10 b7 b3 42
+     mix:  b7 a5 3e cb bf 9d 75 a0 c4 0e fc 79 b6 74 cc 11
+   shift:  1f b5 43 0e f0 ac cf 64 aa 37 0c de 3d 77 79 2c
+     sub:  1f 77 0c 64 f0 b5 79 de aa ac 43 2c 3d 37 cf 0e
+   state:  cb 02 81 8c 17 d2 af 9c 62 aa 64 42 8b b2 5f d7
+ Round 2:
+   input:  cb 02 81 8c 17 d2 af 9c 62 aa 64 42 8b b2 5f d7
+   round:  54 4a fe f5 58 47 f0 fa 48 56 e2 e9 5c 43 f4 fe
+     mix:  9f 48 7f 79 4f 95 5f 66 2a fc 86 ab d7 f1 ab 29
+   shift:  84 e1 dd 69 1a 41 d7 6f 79 2d 38 97 83 fb ac 70
+     sub:  84 fb 38 6f 1a e1 ac 97 79 41 dd 70 83 2d d7 69
+   state:  4f 63 76 06 43 e0 aa 85 af f8 c9 d0 41 fa 0d e4
+ Round 1:
+   input:  4f 63 76 06 43 e0 aa 85 af f8 c9 d0 41 fa 0d e4
+   round:  10 11 12 13 14 15 16 17 58 46 f2 f9 5c 43 f4 fe
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 0:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+Output:
+   plain:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+
+AES_CYPHER_256 encrypt test case:
+Input:
+    data:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rs: 10111213
+    05:  rs: 14151617
+    06:  rs: 18191a1b
+    07:  rs: 1c1d1e1f
+    08:  rot: 1d1e1f1c sub: a472c09c rcon: 01000000 xor: 9cc072a5 rs: a573c29f
+    09:  equ: a573c29f rs: a176c498
+    10:  equ: a176c498 rs: a97fce93
+    11:  equ: a97fce93 rs: a572c09c
+    12:  sub: 0640bade rs: 1651a8cd
+    13:  equ: 1651a8cd rs: 0244beda
+    14:  equ: 0244beda rs: 1a5da4c1
+    15:  equ: 1a5da4c1 rs: 0640bade
+    16:  rot: 40bade06 sub: 09f41d6f rcon: 02000000 xor: 6f1df40b rs: ae87dff0
+    17:  equ: ae87dff0 rs: 0ff11b68
+    18:  equ: 0ff11b68 rs: a68ed5fb
+    19:  equ: a68ed5fb rs: 03fc1567
+    20:  sub: 7bb05985 rs: 6de1f148
+    21:  equ: 6de1f148 rs: 6fa54f92
+    22:  equ: 6fa54f92 rs: 75f8eb53
+    23:  equ: 75f8eb53 rs: 73b8518d
+    24:  rot: b8518d73 sub: 6cd15d8f rcon: 04000000 xor: 8f5dd168 rs: c656827f
+    25:  equ: c656827f rs: c9a79917
+    26:  equ: c9a79917 rs: 6f294cec
+    27:  equ: 6f294cec rs: 6cd5598b
+    28:  sub: 5003cb3d rs: 3de23a75
+    29:  equ: 3de23a75 rs: 524775e7
+    30:  equ: 524775e7 rs: 27bf9eb4
+    31:  equ: 27bf9eb4 rs: 5407cf39
+    32:  rot: 07cf3954 sub: c58a1220 rcon: 08000000 xor: 20128acd rs: 0bdc905f
+    33:  equ: 0bdc905f rs: c27b0948
+    34:  equ: c27b0948 rs: ad5245a4
+    35:  equ: ad5245a4 rs: c1871c2f
+    36:  sub: 78179c15 rs: 45f5a660
+    37:  equ: 45f5a660 rs: 17b2d387
+    38:  equ: 17b2d387 rs: 300d4d33
+    39:  equ: 300d4d33 rs: 640a820a
+    40:  rot: 0a820a64 sub: 67136743 rcon: 10000000 xor: 43671377 rs: 7ccff71c
+    41:  equ: 7ccff71c rs: beb4fe54
+    42:  equ: beb4fe54 rs: 13e6bbf0
+    43:  equ: 13e6bbf0 rs: d261a7df
+    44:  sub: b5ef5c9e rs: f01afafe
+    45:  equ: f01afafe rs: e7a82979
+    46:  equ: e7a82979 rs: d7a5644a
+    47:  equ: d7a5644a rs: b3afe640
+    48:  rot: afe640b3 sub: 798e096d rcon: 20000000 xor: 6d098e59 rs: 2541fe71
+    49:  equ: 2541fe71 rs: 9bf50025
+    50:  equ: 9bf50025 rs: 8813bbd5
+    51:  equ: 8813bbd5 rs: 5a721c0a
+    52:  sub: be409c67 rs: 4e5a6699
+    53:  equ: 4e5a6699 rs: a9f24fe0
+    54:  equ: a9f24fe0 rs: 7e572baa
+    55:  equ: 7e572baa rs: cdf8cdea
+    56:  rot: f8cdeacd sub: 41bd87bd rcon: 40000000 xor: bd87bd01 rs: 24fc79cc
+    57:  equ: 24fc79cc rs: bf0979e9
+    58:  equ: bf0979e9 rs: 371ac23c
+    59:  equ: 371ac23c rs: 6d68de36
+Encrypting block at 0 ...
+ Round 0:
+   input:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 1:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   round:  10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f
+   state:  4f 63 76 06 43 e0 aa 85 ef a7 21 32 01 a4 e7 05
+ Round 2:
+   input:  4f 63 76 06 43 e0 aa 85 ef a7 21 32 01 a4 e7 05
+     sub:  84 fb 38 6f 1a e1 ac 97 df 5c fd 23 7c 49 94 6b
+   shift:  84 e1 fd 6b 1a 5c 94 6f df 49 38 97 7c fb ac 23
+     mix:  bd 2a 39 5d 2b 6a c4 38 d1 92 44 3e 61 5d a1 95
+   round:  a5 73 c2 9f a1 76 c4 98 a9 7f ce 93 a5 72 c0 9c
+   state:  18 59 fb c2 8a 1c 00 a0 78 ed 8a ad c4 2f 61 09
+ Round 3:
+   input:  18 59 fb c2 8a 1c 00 a0 78 ed 8a ad c4 2f 61 09
+     sub:  ad cb 0f 25 7e 9c 63 e0 bc 55 7e 95 1c 15 ef 01
+   shift:  ad 9c 7e 01 7e 55 ef 25 bc 15 0f e0 1c cb 63 95
+     mix:  81 0d ce 0c c9 db 81 72 b3 67 8c 1e 88 a1 b5 bd
+   round:  16 51 a8 cd 02 44 be da 1a 5d a4 c1 06 40 ba de
+   state:  97 5c 66 c1 cb 9f 3f a8 a9 3a 28 df 8e e1 0f 63
+ Round 4:
+   input:  97 5c 66 c1 cb 9f 3f a8 a9 3a 28 df 8e e1 0f 63
+     sub:  88 4a 33 78 1f db 75 c2 d3 80 34 9e 19 f8 76 fb
+   shift:  88 db 34 fb 1f 80 76 78 d3 f8 33 c2 19 4a 75 9e
+     mix:  b2 82 2d 81 ab e6 fb 27 5f af 10 3a 07 8c 00 33
+   round:  ae 87 df f0 0f f1 1b 68 a6 8e d5 fb 03 fc 15 67
+   state:  1c 05 f2 71 a4 17 e0 4f f9 21 c5 c1 04 70 15 54
+ Round 5:
+   input:  1c 05 f2 71 a4 17 e0 4f f9 21 c5 c1 04 70 15 54
+     sub:  9c 6b 89 a3 49 f0 e1 84 99 fd a6 78 f2 51 59 20
+   shift:  9c f0 a6 20 49 fd 59 a3 99 51 89 84 f2 6b e1 78
+     mix:  ae b6 5b a9 74 e0 f8 22 d7 3f 56 7b db 64 c8 77
+   round:  6d e1 f1 48 6f a5 4f 92 75 f8 eb 53 73 b8 51 8d
+   state:  c3 57 aa e1 1b 45 b7 b0 a2 c7 bd 28 a8 dc 99 fa
+ Round 6:
+   input:  c3 57 aa e1 1b 45 b7 b0 a2 c7 bd 28 a8 dc 99 fa
+     sub:  2e 5b ac f8 af 6e a9 e7 3a c6 7a 34 c2 86 ee 2d
+   shift:  2e 6e 7a 2d af c6 ee f8 3a 86 ac e7 c2 5b a9 34
+     mix:  b9 51 c3 3c 02 e9 bd 29 ae 25 cd b1 ef a0 8c c7
+   round:  c6 56 82 7f c9 a7 99 17 6f 29 4c ec 6c d5 59 8b
+   state:  7f 07 41 43 cb 4e 24 3e c1 0c 81 5d 83 75 d5 4c
+ Round 7:
+   input:  7f 07 41 43 cb 4e 24 3e c1 0c 81 5d 83 75 d5 4c
+     sub:  d2 c5 83 1a 1f 2f 36 b2 78 fe 0c 4c ec 9d 03 29
+   shift:  d2 2f 0c 29 1f fe 03 1a 78 9d 83 b2 ec c5 36 4c
+     mix:  eb b1 9e 1c 3e e7 c9 e8 7d 75 35 e9 ed 6b 91 44
+   round:  3d e2 3a 75 52 47 75 e7 27 bf 9e b4 54 07 cf 39
+   state:  d6 53 a4 69 6c a0 bc 0f 5a ca ab 5d b9 6c 5e 7d
+ Round 8:
+   input:  d6 53 a4 69 6c a0 bc 0f 5a ca ab 5d b9 6c 5e 7d
+     sub:  f6 ed 49 f9 50 e0 65 76 be 74 62 4c 56 50 58 ff
+   shift:  f6 e0 62 ff 50 74 58 f9 be 50 49 76 56 ed 65 4c
+     mix:  51 74 c8 66 9d a9 84 35 a8 b3 e6 2c a9 74 a5 ea
+   round:  0b dc 90 5f c2 7b 09 48 ad 52 45 a4 c1 87 1c 2f
+   state:  5a a8 58 39 5f d2 8d 7d 05 e1 a3 88 68 f3 b9 c5
+ Round 9:
+   input:  5a a8 58 39 5f d2 8d 7d 05 e1 a3 88 68 f3 b9 c5
+     sub:  be c2 6a 12 cf b5 5d ff 6b f8 0a c4 45 0d 56 a6
+   shift:  be b5 0a a6 cf f8 56 12 6b 0d 6a ff 45 c2 5d c4
+     mix:  0f 77 ee 31 d2 cc ad c0 54 30 a8 3f 4e f9 6a c3
+   round:  45 f5 a6 60 17 b2 d3 87 30 0d 4d 33 64 0a 82 0a
+   state:  4a 82 48 51 c5 7e 7e 47 64 3d e5 0c 2a f3 e8 c9
+ Round 10:
+   input:  4a 82 48 51 c5 7e 7e 47 64 3d e5 0c 2a f3 e8 c9
+     sub:  d6 13 52 d1 a6 f3 f3 a0 43 27 d9 fe e5 0d 9b dd
+   shift:  d6 f3 d9 dd a6 27 9b d1 43 0d 52 a0 e5 13 f3 fe
+     mix:  bd 86 f0 ea 74 8f c4 f4 63 0f 11 c1 e9 33 12 33
+   round:  7c cf f7 1c be b4 fe 54 13 e6 bb f0 d2 61 a7 df
+   state:  c1 49 07 f6 ca 3b 3a a0 70 e9 aa 31 3b 52 b5 ec
+ Round 11:
+   input:  c1 49 07 f6 ca 3b 3a a0 70 e9 aa 31 3b 52 b5 ec
+     sub:  78 3b c5 42 74 e2 80 e0 51 1e ac c7 e2 00 d5 ce
+   shift:  78 e2 ac ce 74 1e d5 42 51 00 c5 e0 e2 3b 80 c7
+     mix:  af 86 90 41 5d 6e 1d d3 87 e5 fb ed d5 c8 90 13
+   round:  f0 1a fa fe e7 a8 29 79 d7 a5 64 4a b3 af e6 40
+   state:  5f 9c 6a bf ba c6 34 aa 50 40 9f a7 66 67 76 53
+ Round 12:
+   input:  5f 9c 6a bf ba c6 34 aa 50 40 9f a7 66 67 76 53
+     sub:  cf de 02 08 f4 b4 18 ac 53 09 db 5c 33 85 38 ed
+   shift:  cf b4 db ed f4 09 38 08 53 85 02 ac 33 de 18 5c
+     mix:  74 27 fa e4 d8 a6 95 26 9c e8 3d 31 5b e0 39 2b
+   round:  25 41 fe 71 9b f5 00 25 88 13 bb d5 5a 72 1c 0a
+   state:  51 66 04 95 43 53 95 03 14 fb 86 e4 01 92 25 21
+ Round 13:
+   input:  51 66 04 95 43 53 95 03 14 fb 86 e4 01 92 25 21
+     sub:  d1 33 f2 2a 1a ed 2a 7b fa 0f 44 69 7c 4f 3f fd
+   shift:  d1 ed 44 fd 1a 0f 3f 2a fa 4f f2 7b 7c 33 2a 69
+     mix:  2c 21 a8 20 30 6f 15 4a b7 12 c7 5e ee 0d a0 4f
+   round:  4e 5a 66 99 a9 f2 4f e0 7e 57 2b aa cd f8 cd ea
+   state:  62 7b ce b9 99 9d 5a aa c9 45 ec f4 23 f5 6d a5
+ Round 14:
+   input:  62 7b ce b9 99 9d 5a aa c9 45 ec f4 23 f5 6d a5
+     sub:  aa 21 8b 56 ee 5e be ac dd 6e ce bf 26 e6 3c 06
+   shift:  aa 5e ce 06 ee 6e 3c 56 dd e6 8b ac 26 21 be bf
+   round:  24 fc 79 cc bf 09 79 e9 37 1a c2 3c 6d 68 de 36
+   state:  8e a2 b7 ca 51 67 45 bf ea fc 49 90 4b 49 60 89
+Output:
+  cypher:  8e a2 b7 ca 51 67 45 bf ea fc 49 90 4b 49 60 89
+
+AES_CYPHER_256 decrypt test case:
+Input:
+    data:  8e a2 b7 ca 51 67 45 bf ea fc 49 90 4b 49 60 89
+    key :  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f
+Key Expansion:
+    00:  rs: 00010203
+    01:  rs: 04050607
+    02:  rs: 08090a0b
+    03:  rs: 0c0d0e0f
+    04:  rs: 10111213
+    05:  rs: 14151617
+    06:  rs: 18191a1b
+    07:  rs: 1c1d1e1f
+    08:  rot: 1d1e1f1c sub: a472c09c rcon: 01000000 xor: 9cc072a5 rs: a573c29f
+    09:  equ: a573c29f rs: a176c498
+    10:  equ: a176c498 rs: a97fce93
+    11:  equ: a97fce93 rs: a572c09c
+    12:  sub: 0640bade rs: 1651a8cd
+    13:  equ: 1651a8cd rs: 0244beda
+    14:  equ: 0244beda rs: 1a5da4c1
+    15:  equ: 1a5da4c1 rs: 0640bade
+    16:  rot: 40bade06 sub: 09f41d6f rcon: 02000000 xor: 6f1df40b rs: ae87dff0
+    17:  equ: ae87dff0 rs: 0ff11b68
+    18:  equ: 0ff11b68 rs: a68ed5fb
+    19:  equ: a68ed5fb rs: 03fc1567
+    20:  sub: 7bb05985 rs: 6de1f148
+    21:  equ: 6de1f148 rs: 6fa54f92
+    22:  equ: 6fa54f92 rs: 75f8eb53
+    23:  equ: 75f8eb53 rs: 73b8518d
+    24:  rot: b8518d73 sub: 6cd15d8f rcon: 04000000 xor: 8f5dd168 rs: c656827f
+    25:  equ: c656827f rs: c9a79917
+    26:  equ: c9a79917 rs: 6f294cec
+    27:  equ: 6f294cec rs: 6cd5598b
+    28:  sub: 5003cb3d rs: 3de23a75
+    29:  equ: 3de23a75 rs: 524775e7
+    30:  equ: 524775e7 rs: 27bf9eb4
+    31:  equ: 27bf9eb4 rs: 5407cf39
+    32:  rot: 07cf3954 sub: c58a1220 rcon: 08000000 xor: 20128acd rs: 0bdc905f
+    33:  equ: 0bdc905f rs: c27b0948
+    34:  equ: c27b0948 rs: ad5245a4
+    35:  equ: ad5245a4 rs: c1871c2f
+    36:  sub: 78179c15 rs: 45f5a660
+    37:  equ: 45f5a660 rs: 17b2d387
+    38:  equ: 17b2d387 rs: 300d4d33
+    39:  equ: 300d4d33 rs: 640a820a
+    40:  rot: 0a820a64 sub: 67136743 rcon: 10000000 xor: 43671377 rs: 7ccff71c
+    41:  equ: 7ccff71c rs: beb4fe54
+    42:  equ: beb4fe54 rs: 13e6bbf0
+    43:  equ: 13e6bbf0 rs: d261a7df
+    44:  sub: b5ef5c9e rs: f01afafe
+    45:  equ: f01afafe rs: e7a82979
+    46:  equ: e7a82979 rs: d7a5644a
+    47:  equ: d7a5644a rs: b3afe640
+    48:  rot: afe640b3 sub: 798e096d rcon: 20000000 xor: 6d098e59 rs: 2541fe71
+    49:  equ: 2541fe71 rs: 9bf50025
+    50:  equ: 9bf50025 rs: 8813bbd5
+    51:  equ: 8813bbd5 rs: 5a721c0a
+    52:  sub: be409c67 rs: 4e5a6699
+    53:  equ: 4e5a6699 rs: a9f24fe0
+    54:  equ: a9f24fe0 rs: 7e572baa
+    55:  equ: 7e572baa rs: cdf8cdea
+    56:  rot: f8cdeacd sub: 41bd87bd rcon: 40000000 xor: bd87bd01 rs: 24fc79cc
+    57:  equ: 24fc79cc rs: bf0979e9
+    58:  equ: bf0979e9 rs: 371ac23c
+    59:  equ: 371ac23c rs: 6d68de36
+Decrypting block at 0 ...
+ Round 14:
+   input:  8e a2 b7 ca 51 67 45 bf ea fc 49 90 4b 49 60 89
+   round:  24 fc 79 cc bf 09 79 e9 37 1a c2 3c 6d 68 de 36
+   shift:  aa 5e ce 06 ee 6e 3c 56 dd e6 8b ac 26 21 be bf
+     sub:  aa 21 8b 56 ee 5e be ac dd 6e ce bf 26 e6 3c 06
+   state:  62 7b ce b9 99 9d 5a aa c9 45 ec f4 23 f5 6d a5
+ Round 13:
+   input:  62 7b ce b9 99 9d 5a aa c9 45 ec f4 23 f5 6d a5
+   round:  4e 5a 66 99 a9 f2 4f e0 7e 57 2b aa cd f8 cd ea
+     mix:  2c 21 a8 20 30 6f 15 4a b7 12 c7 5e ee 0d a0 4f
+   shift:  d1 ed 44 fd 1a 0f 3f 2a fa 4f f2 7b 7c 33 2a 69
+     sub:  d1 33 f2 2a 1a ed 2a 7b fa 0f 44 69 7c 4f 3f fd
+   state:  51 66 04 95 43 53 95 03 14 fb 86 e4 01 92 25 21
+ Round 12:
+   input:  51 66 04 95 43 53 95 03 14 fb 86 e4 01 92 25 21
+   round:  25 41 fe 71 9b f5 00 25 88 13 bb d5 5a 72 1c 0a
+     mix:  74 27 fa e4 d8 a6 95 26 9c e8 3d 31 5b e0 39 2b
+   shift:  cf b4 db ed f4 09 38 08 53 85 02 ac 33 de 18 5c
+     sub:  cf de 02 08 f4 b4 18 ac 53 09 db 5c 33 85 38 ed
+   state:  5f 9c 6a bf ba c6 34 aa 50 40 9f a7 66 67 76 53
+ Round 11:
+   input:  5f 9c 6a bf ba c6 34 aa 50 40 9f a7 66 67 76 53
+   round:  f0 1a fa fe e7 a8 29 79 d7 a5 64 4a b3 af e6 40
+     mix:  af 86 90 41 5d 6e 1d d3 87 e5 fb ed d5 c8 90 13
+   shift:  78 e2 ac ce 74 1e d5 42 51 00 c5 e0 e2 3b 80 c7
+     sub:  78 3b c5 42 74 e2 80 e0 51 1e ac c7 e2 00 d5 ce
+   state:  c1 49 07 f6 ca 3b 3a a0 70 e9 aa 31 3b 52 b5 ec
+ Round 10:
+   input:  c1 49 07 f6 ca 3b 3a a0 70 e9 aa 31 3b 52 b5 ec
+   round:  7c cf f7 1c be b4 fe 54 13 e6 bb f0 d2 61 a7 df
+     mix:  bd 86 f0 ea 74 8f c4 f4 63 0f 11 c1 e9 33 12 33
+   shift:  d6 f3 d9 dd a6 27 9b d1 43 0d 52 a0 e5 13 f3 fe
+     sub:  d6 13 52 d1 a6 f3 f3 a0 43 27 d9 fe e5 0d 9b dd
+   state:  4a 82 48 51 c5 7e 7e 47 64 3d e5 0c 2a f3 e8 c9
+ Round 9:
+   input:  4a 82 48 51 c5 7e 7e 47 64 3d e5 0c 2a f3 e8 c9
+   round:  45 f5 a6 60 17 b2 d3 87 30 0d 4d 33 64 0a 82 0a
+     mix:  0f 77 ee 31 d2 cc ad c0 54 30 a8 3f 4e f9 6a c3
+   shift:  be b5 0a a6 cf f8 56 12 6b 0d 6a ff 45 c2 5d c4
+     sub:  be c2 6a 12 cf b5 5d ff 6b f8 0a c4 45 0d 56 a6
+   state:  5a a8 58 39 5f d2 8d 7d 05 e1 a3 88 68 f3 b9 c5
+ Round 8:
+   input:  5a a8 58 39 5f d2 8d 7d 05 e1 a3 88 68 f3 b9 c5
+   round:  0b dc 90 5f c2 7b 09 48 ad 52 45 a4 c1 87 1c 2f
+     mix:  51 74 c8 66 9d a9 84 35 a8 b3 e6 2c a9 74 a5 ea
+   shift:  f6 e0 62 ff 50 74 58 f9 be 50 49 76 56 ed 65 4c
+     sub:  f6 ed 49 f9 50 e0 65 76 be 74 62 4c 56 50 58 ff
+   state:  d6 53 a4 69 6c a0 bc 0f 5a ca ab 5d b9 6c 5e 7d
+ Round 7:
+   input:  d6 53 a4 69 6c a0 bc 0f 5a ca ab 5d b9 6c 5e 7d
+   round:  3d e2 3a 75 52 47 75 e7 27 bf 9e b4 54 07 cf 39
+     mix:  eb b1 9e 1c 3e e7 c9 e8 7d 75 35 e9 ed 6b 91 44
+   shift:  d2 2f 0c 29 1f fe 03 1a 78 9d 83 b2 ec c5 36 4c
+     sub:  d2 c5 83 1a 1f 2f 36 b2 78 fe 0c 4c ec 9d 03 29
+   state:  7f 07 41 43 cb 4e 24 3e c1 0c 81 5d 83 75 d5 4c
+ Round 6:
+   input:  7f 07 41 43 cb 4e 24 3e c1 0c 81 5d 83 75 d5 4c
+   round:  c6 56 82 7f c9 a7 99 17 6f 29 4c ec 6c d5 59 8b
+     mix:  b9 51 c3 3c 02 e9 bd 29 ae 25 cd b1 ef a0 8c c7
+   shift:  2e 6e 7a 2d af c6 ee f8 3a 86 ac e7 c2 5b a9 34
+     sub:  2e 5b ac f8 af 6e a9 e7 3a c6 7a 34 c2 86 ee 2d
+   state:  c3 57 aa e1 1b 45 b7 b0 a2 c7 bd 28 a8 dc 99 fa
+ Round 5:
+   input:  c3 57 aa e1 1b 45 b7 b0 a2 c7 bd 28 a8 dc 99 fa
+   round:  6d e1 f1 48 6f a5 4f 92 75 f8 eb 53 73 b8 51 8d
+     mix:  ae b6 5b a9 74 e0 f8 22 d7 3f 56 7b db 64 c8 77
+   shift:  9c f0 a6 20 49 fd 59 a3 99 51 89 84 f2 6b e1 78
+     sub:  9c 6b 89 a3 49 f0 e1 84 99 fd a6 78 f2 51 59 20
+   state:  1c 05 f2 71 a4 17 e0 4f f9 21 c5 c1 04 70 15 54
+ Round 4:
+   input:  1c 05 f2 71 a4 17 e0 4f f9 21 c5 c1 04 70 15 54
+   round:  ae 87 df f0 0f f1 1b 68 a6 8e d5 fb 03 fc 15 67
+     mix:  b2 82 2d 81 ab e6 fb 27 5f af 10 3a 07 8c 00 33
+   shift:  88 db 34 fb 1f 80 76 78 d3 f8 33 c2 19 4a 75 9e
+     sub:  88 4a 33 78 1f db 75 c2 d3 80 34 9e 19 f8 76 fb
+   state:  97 5c 66 c1 cb 9f 3f a8 a9 3a 28 df 8e e1 0f 63
+ Round 3:
+   input:  97 5c 66 c1 cb 9f 3f a8 a9 3a 28 df 8e e1 0f 63
+   round:  16 51 a8 cd 02 44 be da 1a 5d a4 c1 06 40 ba de
+     mix:  81 0d ce 0c c9 db 81 72 b3 67 8c 1e 88 a1 b5 bd
+   shift:  ad 9c 7e 01 7e 55 ef 25 bc 15 0f e0 1c cb 63 95
+     sub:  ad cb 0f 25 7e 9c 63 e0 bc 55 7e 95 1c 15 ef 01
+   state:  18 59 fb c2 8a 1c 00 a0 78 ed 8a ad c4 2f 61 09
+ Round 2:
+   input:  18 59 fb c2 8a 1c 00 a0 78 ed 8a ad c4 2f 61 09
+   round:  a5 73 c2 9f a1 76 c4 98 a9 7f ce 93 a5 72 c0 9c
+     mix:  bd 2a 39 5d 2b 6a c4 38 d1 92 44 3e 61 5d a1 95
+   shift:  84 e1 fd 6b 1a 5c 94 6f df 49 38 97 7c fb ac 23
+     sub:  84 fb 38 6f 1a e1 ac 97 df 5c fd 23 7c 49 94 6b
+   state:  4f 63 76 06 43 e0 aa 85 ef a7 21 32 01 a4 e7 05
+ Round 1:
+   input:  4f 63 76 06 43 e0 aa 85 ef a7 21 32 01 a4 e7 05
+   round:  10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f
+     mix:  5f 72 64 15 57 f5 bc 92 f7 be 3b 29 1d b9 f9 1a
+   shift:  63 53 e0 8c 09 60 e1 04 cd 70 b7 51 ba ca d0 e7
+     sub:  63 ca b7 04 09 53 d0 51 cd 60 e0 e7 ba 70 e1 8c
+   state:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+ Round 0:
+   input:  00 10 20 30 40 50 60 70 80 90 a0 b0 c0 d0 e0 f0
+   round:  00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+   state:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+Output:
+   plain:  00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+Program ended with exit code: 0
+
