@@ -16,7 +16,7 @@ Rijndael算法是由比利时学者Joan Daemen和Vincent Rijmen所提出的，�
 
 ![Joan Daemen & Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan-Vincent.png)
 ![Joan Daemen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan.png)
-![Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Vincent.png)
+![Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-vincent.png)
 
 
 ## AES vs Rijndael
@@ -260,7 +260,7 @@ void aes_add_round_key(AES_CYPHER_T mode, uint8_t *state,
 
 ## 密钥扩展算法（Key Expansion）
 
-密钥扩展算法是Rijndael的密钥编排实现算法，其目的是根据种子密钥（用户密钥）生成多组轮密钥。轮密钥为多组128位密钥，对应不同密钥长度，分别是44，52，60组。
+密钥扩展算法是Rijndael的密钥编排实现算法，其目的是根据种子密钥（用户密钥）生成多组轮密钥。轮密钥为多组128位密钥，对应不同密钥长度，分别是11，13，15组。
 
 ![AES: 密钥扩展](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-KeyExpansion.png)
 
@@ -301,7 +301,7 @@ void aes_key_expansion(AES_CYPHER_T mode, uint8_t *key, uint8_t *round)
 }
 ```
 
-以AES-128为例，从128位种子密钥生成44组轮密钥（每组128位）：
+以AES-128为例，从128位种子密钥生成11组轮密钥（每组128位）：
 
 ```c
 Input:
