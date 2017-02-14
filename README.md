@@ -14,7 +14,10 @@ Rijndael算法是由比利时学者Joan Daemen和Vincent Rijmen所提出的，�
 
 ## Joan Daemen和Vincent Rijmen
 
-![Joan Daemen & Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan-Vincent.png)![Joan Daemen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan.png)![Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Vincent.png)
+![Joan Daemen & Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan-Vincent.png)
+![Joan Daemen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Joan.png)
+![Vincent Rijmen](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Vincent.png)
+
 
 ## AES vs Rijndael
 
@@ -126,6 +129,10 @@ int aes_encrypt(AES_CYPHER_T mode, uint8_t *data, int len, uint8_t *key)
     return 0;
 }
 ```
+
+## 动画演示加密过程
+
+Enrique Zabala创建了一个AES-128加密算法的动画演示，清楚、直观地介绍了轮函数执行的过程。[点击可直接观看](http://www.formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng.swf)。
 
 ## 轮函数拆解：字节代换（Substitute Bytes）
 
@@ -796,7 +803,7 @@ openssl speed -multi {1/2/4/8} -elapsed -evp {aes-256/128-cbc}
 
 AES从产生至今依然是最安全的加密算法，传统攻击手段依然无法撼动其安全性。虽然已有[攻击手段](https://www.schneier.com/blog/archives/2009/07/another_new_aes.html)显示可以将AES-256的暴力搜索次数从2^256次降至2^119次，但依然没有实际操作价值。
 
-不过随着计算力的提升，特别是量子计算机的发展，AES将不再是安全的。不过可以肯定的是：一定会出现更安全的加密算法。
+不过随着计算力的提升，特别是量子计算机的发展，AES将不再是安全的。当然可以肯定的是：一定会出现更安全的加密算法。
 
 ## 旁路攻击
 
