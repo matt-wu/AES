@@ -640,6 +640,7 @@ ECB的理想应用场景是短数据（如加密密钥）的加密。此模式�
 
 经ECB模式加密的图片：
 ![AES: Leaf ECB加密](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Leaf-ECB.png)
+图中也正好验证了AES的扩散效果：作为局部图案的叶子，其红颜色在加密后扩散到了整张图片上。
 
 经CBC模式加密的图片：
 ![AES: Leaf CBC加密](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Leaf-CBC.jpg)
@@ -742,7 +743,7 @@ AES作为主导的加密标准，其应用越来越广泛，特别是针对网�
 
 ## AES_NI: X86架构
 
-Intel于2010发发布了支持AES加速的CPU，实现了高阶的AES加解密指令即AES_NI：AES New Instructions。AES_NI包含6指令：其中4条用于加解密，2条用于密钥扩展。根据[AES_NI WhitePaper](https://software.intel.com/sites/default/files/article/165683/aes-wp-2012-09-22-v01.pdf)中所说，AES_NI可以带来2-3倍的性能提升。
+Intel于2010发发布了支持AES加速的CPU，实现了高阶的AES加解密指令即AES_NI：AES New Instructions。AES_NI包含6指令：其中4条用于加解密，2条用于密钥扩展。根据[AES_NI白皮书](https://software.intel.com/sites/default/files/article/165683/aes-wp-2012-09-22-v01.pdf)中所说，AES_NI可以带来2-3倍的性能提升。
 
 | Instruction     | Description                              |
 | --------------- | ---------------------------------------- |
@@ -848,7 +849,7 @@ DPA利用不同数据对应的条件功耗分布的差异进行统计分析以�
 
 上海交大的教授[郁昱](http://yuyu.hk/)就通过功耗攻击成功破解了来自多家手机制造商以及服务供应商的SIM卡的密钥。更详细信息可见于他在Blackhat 2015年的[演示稿: Cloning 3G/4G SIM Cards with a PC and an Oscilloscope: Lessons Learned in Physical Security](http://yuyu.hk/files/us-15-Yu-Cloning-3G-4G-Sim-Cards.pdf)。
 
-以色列特拉维夫大学的研究人员利用旁路攻击，成功从Android和iOS设备上窃取到用于加密比特币钱包、Apple Pay账号和其他高价值资产的密钥，详细请参阅[论文: ECDSA Key Extraction from Mobile Devices via Nonintrusive Physical Side Channels](https://www.cs.tau.ac.il/~tromer/mobilesc/mobilesc.pdf);
+以色列特拉维夫大学的研究人员利用旁路攻击，成功从Android和iOS设备上窃取到用于加密比特币钱包、Apple Pay账号和其他高价值资产的密钥，详细请参阅[论文: ECDSA Key Extraction from Mobile Devices via Nonintrusive Physical Side Channels](https://www.cs.tau.ac.il/~tromer/mobilesc/mobilesc.pdf)。
 
 # 参考资料
 
