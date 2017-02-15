@@ -6,7 +6,7 @@ AES, Advanced Encryption Standard，其实是一套标准：[FIPS 197](http://cs
 
 NIST (National INstitute of Standards and Technology) 在1997年9月12日公开征集更高效更安全的替代DES加密算法，第一轮共有15种算法入选，其中5种算法入围了决赛，分别是MARS，RC6，Rijndael，Serpent和Twofish。又经过3年的验证、评测及公众讨论之后Rijndael算法最终入选。
 
-![思维导图](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Mind.png)
+![思维导图](http://blog.dynox.cn/wp-content/uploads/2017/02/AES-Mind.jpg)
 
 ## Rijndael算法
 
@@ -781,8 +781,9 @@ openssl speed -multi {1/2/4/8} -elapsed -evp {aes-256/128-cbc}
 
 从图中可以得到如下结论：
 
-1. AES_NI加速可以提升性能1倍多
-2. 在高并行的情况下，超线程在AES_NI开启的情况下可以带来接近1倍的性能提升；但在AES_NI关闭的情况下对性能提升的贡献要小的多。
+1. AES_NI加速可以提升性能1倍多，AESNI-128基本上都是AES-128的2.2倍左右。
+2. AES-128与AES-256的性能比基本在1.36左右（15/11，忽略密钥编排用时的情况下）
+3. 比较有趣的一点发现是，超线程所带来的影响比预想的要大得多。针对高并行的情形，在开启AES_NI时超线程可以带来接近1倍的性能提升；但在关闭AES_NI的情况下对性能提升的贡献要小的多。超线程虽然逻辑上让我们觉得一核变成了两核，其实质只是同一物理核上的队列管理机制，关闭AES_NI的情况下的测试数据基本验证了这一点。另一方面AES_NI硬件加速是基于物理核的，不可能是针对超线程的，所以超线程与AES_NI组合所带来的巨大的性能提升让人有些费解，比较可能的解释是AES_NI硬件加速引擎的潜力足够强大以至于一个物理核心不能完全发挥其效能，所以在超线程开启的情况下能有更好的表现。
 
 ## ARM及其它体系
 
